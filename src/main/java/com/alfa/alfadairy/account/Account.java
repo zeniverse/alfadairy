@@ -2,12 +2,14 @@ package com.alfa.alfadairy.account;
 
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Builder
@@ -20,8 +22,10 @@ public class Account {
     @Id @GeneratedValue
     private Long id;
 
+    @Column(unique = true)
     private String userId;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -42,4 +46,8 @@ public class Account {
     private String state;
 
     private String zipcode;
+
+    public void generateEmailCheckToken() {
+        this.emailCheckToken = UUID.randomUUID().toString();
+    }
 }
