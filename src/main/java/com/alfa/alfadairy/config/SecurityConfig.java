@@ -17,7 +17,8 @@ public class SecurityConfig {
                 PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .mvcMatchers(
                         "/",
-                        "/sign-up"
+                        "/sign-up",
+                        "/check-email-token"
                 ).permitAll()
                 .anyRequest().authenticated()).build();
     }
