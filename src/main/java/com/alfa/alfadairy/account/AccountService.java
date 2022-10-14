@@ -43,4 +43,8 @@ public class AccountService {
 
         javaMailSender.send(mailMessage);
     }
+
+    public void completeSignUp(Account account) {
+        account.completeSignUp();
+    }
 }
