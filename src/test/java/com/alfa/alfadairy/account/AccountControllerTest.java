@@ -30,6 +30,40 @@ class AccountControllerTest {
 
     @MockBean JavaMailSender javaMailSender;
 
+    @DisplayName("이메일 전송 - 입력값 오류")
+    @Test
+    public void checkEmailToken_wrong_input() throws Exception {
+        mvc.perform(get("/check-email-token")
+                        .param("token", "adfdfasdfas")
+                        .param("email", "test@dddd.com")
+                )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("error"))
+                .andExpect(view().name("account/checked-email"));
+    }
+
+    @DisplayName("이메일 전송 - 입력값 정상")
+    @Test
+    public void checkEmailToken() throws Exception {
+        Account account = Account.builder()
+                .userId("test")
+                .email("test@test.com")
+                .password("123456789")
+                .build();
+        Account newAccount = accountRepository.save(account);
+        newAccount.generateEmailCheckToken();
+
+
+        mvc.perform(get("/check-email-token")
+                        .param("token", newAccount.getEmailCheckToken())
+                        .param("email", newAccount.getEmail())
+                )
+                .andExpect(status().isOk())
+                .andExpect(model().attributeDoesNotExist("error"))
+                .andExpect(model().attributeExists("userId"))
+                .andExpect(view().name("account/checked-email"));
+    }
+
     @DisplayName("회원 가입 화면이 보이는지 확인")
     @Test
     public void signUpView() throws Exception {
