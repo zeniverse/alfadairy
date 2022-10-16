@@ -2943,8 +2943,8 @@ input.qty-val {
 }
 
 .breadcrumb span::before {
-  content: "\f111";
-  font-family: "uicons-regular-straight"  !important;
+  content: "\f105";
+  font-family: "Font Awesome 5 Free";  !important;
   display: inline-block;
   font-size: 9px;
 }
