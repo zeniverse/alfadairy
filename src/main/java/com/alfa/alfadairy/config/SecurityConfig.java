@@ -12,15 +12,25 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return http.authorizeHttpRequests(auth -> auth.requestMatchers(
-                PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .mvcMatchers(
-                        "/",
-                        "/sign-up",
-                        "/check-email-token"
-                ).permitAll()
-                .anyRequest().authenticated()).build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                        .mvcMatchers(
+                                "/",
+                                "/login",
+                                "/register",
+                                "/check-email-token"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+                .and()
+                .build();
     }
 
     @Bean
