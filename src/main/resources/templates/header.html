@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -130,14 +132,28 @@
                                     <!--                                    </a>-->
                                     <!--                                    <a href="shop-compare.html"><span class="lable ml-0">Compare</span></a>-->
                                     <!--                                </div>-->
-                                    <div class="header-action-icon-2">
+
+                                    <div class="header-action-icon-2" sec:authorize="!isAuthenticated()">
+                                        <a href="shop-wishlist.html">
+                                            <img alt="login" src="images/theme/icons/icon-login.png" />
+                                        </a>
+                                        <a href="#" th:href="@{/login}"><span class="lable ml-1">Login</span></a>
+                                    </div>
+                                    <div class="header-action-icon-2" sec:authorize="!isAuthenticated()">
+                                        <a href="shop-wishlist.html">
+                                            <img alt="register" src="images/theme/icons/icon-register.png" />
+                                        </a>
+                                        <a href="#" th:href="@{/register}"><span class="lable ml-1">Register</span></a>
+                                    </div>
+
+                                    <div class="header-action-icon-2" sec:authorize="isAuthenticated()">
                                         <a href="shop-wishlist.html">
                                             <img class="svgInject" alt="Nest" src="images/theme/icons/icon-heart.svg" />
                                             <span class="pro-count blue">6</span>
                                         </a>
                                         <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
                                     </div>
-                                    <div class="header-action-icon-2">
+                                    <div class="header-action-icon-2" sec:authorize="isAuthenticated()">
                                         <a class="mini-cart-icon" href="shop-cart.html">
                                             <img alt="Nest" src="images/theme/icons/icon-cart.svg" />
                                             <span class="pro-count blue">2</span>
@@ -181,13 +197,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="header-action-icon-2">
+                                    <div class="header-action-icon-2" sec:authorize="isAuthenticated()">
                                         <a href="page-account.html">
                                             <img class="svgInject" alt="Nest" src="images/theme/icons/icon-user.svg" />
                                         </a>
                                         <a href="page-account.html"><span class="lable ml-0">Account</span></a>
                                         <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                             <ul>
+                                                <h6>
+                                                    <span sec:authentication="name">Username</span>
+                                                    <hr class="mt-1">
+                                                </h6>
                                                 <li>
                                                     <a href="page-account.html"><i class="fa-regular fa-user mr-10"></i>My Account</a>
                                                 </li>
