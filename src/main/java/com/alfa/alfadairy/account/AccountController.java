@@ -25,19 +25,19 @@ public class AccountController {
         webDataBinder.addValidators(signUpFormValidator);
     }
 
-    @GetMapping("/sign-up")
+    @GetMapping("/register")
     public String signUpForm(Model model){
         model.addAttribute(new SignUpForm());
-        return "account/sign-up";
+        return "account/register";
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     public String signUpSubmit(@Valid SignUpForm signUpForm, Errors errors){
         if (errors.hasErrors()){
-            return "account/sign-up";
+            return "account/register";
         }
-
-        accountService.processNewAccount(signUpForm);
+        Account account = accountService.processNewAccount(signUpForm);
+        accountService.login(account);
         return "redirect:/";
     }
 
