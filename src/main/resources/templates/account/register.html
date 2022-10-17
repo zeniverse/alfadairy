@@ -29,8 +29,7 @@
                                             <h1 class="mb-5">Create an Account</h1>
                                             <p class="mb-30">Already have an account? <a href="page-login.html">Login</a></p>
                                         </div>
-                                        <form class="needs-validation" action="#"
-                                              th:action="@{/register}" th:object="${signUpForm}" method="post" novalidate>
+                                        <form class="needs-validation" action="#" th:action="@{/register}" th:object="${signUpForm}" method="post" novalidate>
                                             <div class="form-group pb-1">
                                                 <label for="user">ID</label>
                                                 <input id="user" type="text" th:field="*{userId}" class="form-control"
