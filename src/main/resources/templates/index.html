@@ -7,6 +7,10 @@
 
 <body>
 
+    <div class="alert alert-warning" role="alert" th:if="${account != null && !account.emailVerified}">
+        알파축산 가입을 완료하려면 <a href="#" th:href="@{/check-email}" class="alert-link">계정 인증 이메일을 확인</a>하세요.
+    </div>
+
     <!-- Modal start -->
     <div th:replace="modal.html :: #onloadModal"></div>
     <!-- Modal end -->
