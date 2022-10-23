@@ -224,7 +224,12 @@
                                                     <a href="page-account.html"><i class="fa-solid fa-gear mr-10"></i>Setting</a>
                                                 </li>
                                                 <li>
-                                                    <a href="page-login.html"><i class="fa-solid fa-arrow-right-from-bracket mr-10"></i>Sign out</a>
+                                                    <a href="#" onclick="document.getElementById('logoutForm').submit();"><i class="fa-solid fa-arrow-right-from-bracket mr-10"></i>Sign out</a>
+
+                                                    <form id="logoutForm" action="#" th:action="@{/logout}" method="POST">
+                                                        <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                                                    </form>
+
                                                 </li>
                                             </ul>
                                         </div>
@@ -456,7 +461,7 @@
                                                 <li><a href="page-about.html">About Us</a></li>
                                                 <li><a href="page-contact.html">Contact</a></li>
                                                 <li><a href="page-account.html">My Account</a></li>
-                                                <li><a href="page-login.html">Login</a></li>
+                                                <li><a href="login.html">Login</a></li>
                                                 <li><a href="page-register.html">Register</a></li>
                                                 <li><a href="page-forgot-password.html">Forgot password</a></li>
                                                 <li><a href="page-reset-password.html">Reset password</a></li>
@@ -682,7 +687,7 @@
                                         <li><a href="page-about.html">About Us</a></li>
                                         <li><a href="page-contact.html">Contact</a></li>
                                         <li><a href="page-account.html">My Account</a></li>
-                                        <li><a href="page-login.html">Login</a></li>
+                                        <li><a href="login.html">Login</a></li>
                                         <li><a href="page-register.html">Register</a></li>
                                         <li><a href="page-forgot-password.html">Forgot password</a></li>
                                         <li><a href="page-reset-password.html">Reset password</a></li>
@@ -710,7 +715,7 @@
                             <a href="page-contact.html"><i class="fa-solid fa-location-dot"></i> Our location </a>
                         </div>
                         <div class="single-mobile-header-info">
-                            <a href="page-login.html"><i class="fa-solid fa-user"></i>Log In / Sign Up </a>
+                            <a href="login.html"><i class="fa-solid fa-user"></i>Log In / Sign Up </a>
                         </div>
                         <div class="single-mobile-header-info">
                             <a href="#"><i class="fa-solid fa-headphones"></i>(+01) - 2345 - 6789 </a>
