@@ -22,7 +22,7 @@
             <!--                            <ul>-->
             <!--                                <li><a href="page-about.htlm">About Us</a></li>-->
             <!--                                <li><a href="page-account.html">My Account</a></li>-->
-            <!--                                <li><a href="shop-wishlist.html">Wishlist</a></li>-->
+            <!--                                <li><a href="#">Wishlist</a></li>-->
             <!--                                <li><a href="shop-order.html">Order Tracking</a></li>-->
             <!--                            </ul>-->
             <!--                        </div>-->
@@ -134,24 +134,24 @@
                                     <!--                                </div>-->
 
                                     <div class="header-action-icon-2" sec:authorize="!isAuthenticated()">
-                                        <a href="shop-wishlist.html">
+                                        <a href="#">
                                             <img alt="login" src="images/theme/icons/icon-login.png" />
                                         </a>
                                         <a href="#" th:href="@{/login}"><span class="lable ml-1">Login</span></a>
                                     </div>
                                     <div class="header-action-icon-2" sec:authorize="!isAuthenticated()">
-                                        <a href="shop-wishlist.html">
+                                        <a href="#">
                                             <img alt="register" src="images/theme/icons/icon-register.png" />
                                         </a>
                                         <a href="#" th:href="@{/register}"><span class="lable ml-1">Register</span></a>
                                     </div>
 
                                     <div class="header-action-icon-2" sec:authorize="isAuthenticated()">
-                                        <a href="shop-wishlist.html">
+                                        <a href="#">
                                             <img class="svgInject" alt="Nest" src="images/theme/icons/icon-heart.svg" />
                                             <span class="pro-count blue">6</span>
                                         </a>
-                                        <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
+                                        <a href="#"><span class="lable">Wishlist</span></a>
                                     </div>
                                     <div class="header-action-icon-2" sec:authorize="isAuthenticated()">
                                         <a class="mini-cart-icon" href="shop-cart.html">
@@ -218,7 +218,7 @@
                                                     <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
                                                 </li>
                                                 <li>
-                                                    <a href="shop-wishlist.html"><i class="fi fa-regular fa-heart mr-10"></i>My Wishlist</a>
+                                                    <a href="#"><i class="fi fa-regular fa-heart mr-10"></i>My Wishlist</a>
                                                 </li>
                                                 <li>
                                                     <a href="page-account.html"><i class="fa-solid fa-gear mr-10"></i>Setting</a>
@@ -348,7 +348,7 @@
                                                     </ul>
                                                 </li>
                                                 <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                                <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                                <li><a href="#">Shop – Wishlist</a></li>
                                                 <li><a href="shop-cart.html">Shop – Cart</a></li>
                                                 <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                                 <li><a href="shop-compare.html">Shop – Compare</a></li>
@@ -494,7 +494,7 @@
                         <div class="header-action-right d-block d-lg-none">
                             <div class="header-action-2">
                                 <div class="header-action-icon-2">
-                                    <a href="shop-wishlist.html">
+                                    <a href="#">
                                         <img alt="Nest" src="images/theme/icons/icon-heart.svg" />
                                         <span class="pro-count white">4</span>
                                     </a>
@@ -604,7 +604,7 @@
                                             </ul>
                                         </li>
                                         <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                        <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                        <li><a href="#">Shop – Wishlist</a></li>
                                         <li><a href="shop-cart.html">Shop – Cart</a></li>
                                         <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                         <li><a href="shop-compare.html">Shop – Compare</a></li>
