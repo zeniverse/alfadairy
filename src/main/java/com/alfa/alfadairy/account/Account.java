@@ -58,4 +58,12 @@ public class Account {
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
     }
+
+    public void updateAddress(Address address){
+        this.address = address;
+    }
+
+    public void passwordUpdate(String newPassword) {
+        this.password = newPassword;
+    }
 }

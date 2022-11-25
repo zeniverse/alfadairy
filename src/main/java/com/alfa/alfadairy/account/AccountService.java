@@ -77,4 +77,20 @@ public class AccountService implements UserDetailsService {
 
         return new UserAccount(account);
     }
+
+    public void updateAddress(Account account, AddressForm addressForm) {
+        Address address = Address.builder()
+                .streetAddress(addressForm.getStreetAddress())
+                .detailAddress(addressForm.getDetailAddress())
+                .zipcode(addressForm.getZipcode())
+                .build();
+
+        account.updateAddress(address);
+        accountRepository.save(account);
+    }
+
+    public void updatePassword(Account account, String newPassword) {
+        account.passwordUpdate(passwordEncoder.encode(newPassword));
+        accountRepository.save(account);
+    }
 }
