@@ -2,10 +2,7 @@ package com.alfa.alfadairy.account;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +27,9 @@ public class Account {
 
     private String password;
 
+    @Embedded
+    private Address address;
+
     private boolean emailVerified;
 
     private String emailCheckToken;
@@ -40,12 +40,6 @@ public class Account {
 
     // TODO : Order Entity를 만들고 난 후에 연관관계 설정해야한다
 //    private List<Order> orders = new ArrayList<>();
-
-    private String city;
-
-    private String state;
-
-    private String zipcode;
 
     public void generateEmailCheckToken() {
         this.emailCheckToken = UUID.randomUUID().toString();
@@ -63,5 +57,13 @@ public class Account {
 
     public boolean canSendConfirmEmail() {
         return this.emailCheckTokenGeneratedAt.isBefore(LocalDateTime.now().minusHours(1));
+    }
+
+    public void updateAddress(Address address){
+        this.address = address;
+    }
+
+    public void passwordUpdate(String newPassword) {
+        this.password = newPassword;
     }
 }

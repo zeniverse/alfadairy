@@ -7,6 +7,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -16,13 +17,19 @@ import javax.validation.Valid;
 public class AccountController {
 
     private final SignUpFormValidator signUpFormValidator;
+    private final PasswordFormValidator passwordFormValidator;
     private final AccountService accountService;
     private final AccountRepository accountRepository;
 
 
     @InitBinder("signUpForm")
-    public void initBinder(WebDataBinder webDataBinder){
+    public void signUpFormInitBinder(WebDataBinder webDataBinder){
         webDataBinder.addValidators(signUpFormValidator);
+    }
+
+    @InitBinder("passwordForm")
+    public void passwordFormInitBinder(WebDataBinder webDataBinder){
+        webDataBinder.addValidators(passwordFormValidator);
     }
 
     @GetMapping("/register")
@@ -80,5 +87,59 @@ public class AccountController {
         account.generateEmailCheckToken();
         accountService.sendSignUpConfirmEmail(account);
         return "redirect:/";
+    }
+
+    @GetMapping("/profile/{userId}")
+    public String viewProfile(@PathVariable String userId, Model model, @CurrentAccount Account account){
+        Account byUserId = accountRepository.findByUserId(userId);
+
+        if (byUserId == null){
+            throw new IllegalArgumentException(userId + "에 해당하는 사용자가 없습니다.");
+        }
+
+        model.addAttribute("account", byUserId);
+        model.addAttribute("isOwner", byUserId.equals(account));
+        return "account/profile";
+    }
+
+    @GetMapping("/profile/address")
+    public String setAddress(@CurrentAccount Account account, Model model){
+
+        model.addAttribute("account", account);
+        model.addAttribute("isOwner", account.equals(account));
+        model.addAttribute(new AddressForm());
+        return "account/address";
+    }
+
+    @PostMapping("/profile/address")
+    public String editAddress(@CurrentAccount Account account, @Valid AddressForm addressForm, Errors errors){
+
+        if(errors.hasErrors()){
+            return "account/address";
+        }
+
+        accountService.updateAddress(account, addressForm);
+        return "redirect:/profile/" + account.getUserId();
+    }
+
+    @GetMapping("/profile/password")
+    public String passwordForm(@CurrentAccount Account account, Model model){
+        model.addAttribute(account);
+        model.addAttribute(new PasswordForm());
+
+        return "account/password";
+    }
+
+    @PostMapping("/profile/password")
+    public String updatePassword(@CurrentAccount Account account, Model model,
+                                 @Valid PasswordForm passwordForm, Errors errors){
+
+        if(errors.hasErrors()){
+            model.addAttribute(account);
+            return "account/password";
+        }
+
+        accountService.updatePassword(account, passwordForm.getNewPassword());
+        return "redirect:/profile/" + account.getUserId();
     }
 }
