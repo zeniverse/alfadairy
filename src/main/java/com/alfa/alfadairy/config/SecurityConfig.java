@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 "/",
                                 "/login",
                                 "/register",
+                                "/checked-email",
                                 "/check-email-token"
                         ).permitAll()
                         .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
