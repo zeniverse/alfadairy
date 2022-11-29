@@ -93,4 +93,16 @@ public class AccountService implements UserDetailsService {
         account.passwordUpdate(passwordEncoder.encode(newPassword));
         accountRepository.save(account);
     }
+
+    public void sendLoginLink(Account account) {
+        account.generateEmailCheckToken();
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(account.getEmail());
+        mailMessage.setSubject("알파축산, 로그인 링크");
+        mailMessage.setText("/login-by-email?token=" + account.getEmailCheckToken()
+                + "&email=" + account.getEmail());
+
+        javaMailSender.send(mailMessage);
+    }
 }
