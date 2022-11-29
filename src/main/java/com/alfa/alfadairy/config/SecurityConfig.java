@@ -33,7 +33,9 @@ public class SecurityConfig {
                                 "/login",
                                 "/register",
                                 "/checked-email",
-                                "/check-email-token"
+                                "/check-email-token",
+                                "/email-login",
+                                "/login-by-email"
                         ).permitAll()
                         .mvcMatchers(HttpMethod.GET, "/profile/*").permitAll()
                         .anyRequest().authenticated()
